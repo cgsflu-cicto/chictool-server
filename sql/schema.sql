@@ -29,6 +29,20 @@ CREATE TABLE IF NOT EXISTS computers (
   KEY idx_computers_office (office)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS lookup_values (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  source VARCHAR(100) NOT NULL,
+  value VARCHAR(255) NOT NULL,
+  label VARCHAR(255) NOT NULL,
+  sortOrder INT NOT NULL DEFAULT 0,
+  isActive TINYINT(1) NOT NULL DEFAULT 1,
+  createdAt DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+  updatedAt DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3),
+  PRIMARY KEY (id),
+  UNIQUE KEY uq_lookup_values_source_value (source, value),
+  KEY idx_lookup_values_source_active_sort (source, isActive, sortOrder, label)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS peripherals (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   syncId VARCHAR(64) NOT NULL,

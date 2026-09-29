@@ -16,7 +16,7 @@ npm install
 copy .env.example .env
 ```
 
-Set the values in `.env`. On a new database, set `MYSQL_INIT_SCHEMA=true` for one start to create the inventory tables from `sql/schema.sql`; then change it back to `false`.
+Set the values in `.env`. On a new database, set `MYSQL_INIT_SCHEMA=true` for one start to create the inventory and lookup tables from `sql/schema.sql`; then change it back to `false`.
 
 ```env
 HOST=0.0.0.0
@@ -50,6 +50,7 @@ By default, the API listens on `http://localhost:3000`. CORS is enabled for the 
 | `POST` | `/api/computers` | Creates or updates a computer by `serialNumber`. |
 | `POST` | `/api/peripherals` | Creates or updates a peripheral by `syncId`. |
 | `DELETE` | `/api/peripherals/:syncId` | Soft-deletes a peripheral. |
+| `GET` | `/api/lookups` | Returns the canonical lookup-value snapshot for desktop cache sync. |
 
 ### Upsert a computer
 
